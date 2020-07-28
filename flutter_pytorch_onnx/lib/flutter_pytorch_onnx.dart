@@ -18,4 +18,8 @@ class FlutterPytorchOnnx {
   static Future<List<String>> getModuleClasses() async {
     return await _channel.invokeListMethod<String>("getModuleClasses");
   }
+
+  static Future<List<double>> analyzeText(String text) async {
+    return await _channel.invokeListMethod<double>("analyzeText", [text]);
+  }
 }

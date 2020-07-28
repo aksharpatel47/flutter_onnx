@@ -12,6 +12,13 @@ void main() {
   runApp(MyApp());
 }
 
+class ClassScore {
+  final String className;
+  final double score;
+
+  ClassScore(this.className, this.score);
+}
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -44,6 +51,14 @@ class _MyAppState extends State<MyApp> {
       await FlutterPytorchOnnx.loadModule(file.absolute.path);
       final moduleClasses = await FlutterPytorchOnnx.getModuleClasses();
       print(moduleClasses);
+      final scores =
+          await FlutterPytorchOnnx.analyzeText("I love playing games.");
+      print(scores);
+
+      final top5Classes = getTopKClasses(moduleClasses, scores, 5);
+      for (var item in top5Classes) {
+        print("${item.className} => ${item.score}");
+      }
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -56,6 +71,18 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _platformVersion = platformVersion;
     });
+  }
+
+  List<ClassScore> getTopKClasses(
+      List<String> classes, List<double> scores, int k) {
+    final classScores = List<ClassScore>();
+    for (var i = 0; i < classes.length; i++) {
+      classScores.add(ClassScore(classes[i], scores[i]));
+    }
+
+    classScores.sort((a, b) => -a.score.compareTo(b.score));
+
+    return classScores.sublist(0, k);
   }
 
   @override
