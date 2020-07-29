@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 class FlutterPytorchOnnx {
   static const MethodChannel _channel =
@@ -12,7 +14,21 @@ class FlutterPytorchOnnx {
   }
 
   static Future<bool> loadModule(String assetPath) async {
-    return await _channel.invokeMethod("loadModule", [assetPath]);
+    String updatedAssetPath = assetPath;
+    if (Platform.isAndroid) {
+      final asset = await rootBundle.load(assetPath);
+      final tempDir = await getTemporaryDirectory();
+      final file =
+          File(tempDir.absolute.path + "/${assetPath.split("/").last}");
+      final doesFileExist = await file.exists();
+      if (!doesFileExist) {
+        file.writeAsBytes(
+            asset.buffer.asUint8List(asset.offsetInBytes, asset.lengthInBytes));
+      }
+      updatedAssetPath = file.absolute.path;
+    }
+
+    return await _channel.invokeMethod("loadModule", [updatedAssetPath]);
   }
 
   static Future<List<String>> getModuleClasses() async {

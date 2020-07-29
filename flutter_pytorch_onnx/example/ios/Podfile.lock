@@ -1,0 +1,39 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_pytorch_onnx (0.0.1):
+    - Flutter
+    - LibTorch (= 1.6.0)
+  - LibTorch (1.6.0):
+    - LibTorch/Core (= 1.6.0)
+  - LibTorch/Core (1.6.0):
+    - LibTorch/Torch
+  - LibTorch/Torch (1.6.0)
+  - path_provider (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_pytorch_onnx (from `.symlinks/plugins/flutter_pytorch_onnx/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+
+SPEC REPOS:
+  trunk:
+    - LibTorch
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_pytorch_onnx:
+    :path: ".symlinks/plugins/flutter_pytorch_onnx/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_pytorch_onnx: e37f1c88ef350747bbe0e769ea43c7680c8ac95a
+  LibTorch: 5478f8eafc4915cc10502f68054018f99a2037b5
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+
+PODFILE CHECKSUM: ddd930128a51b4de5dcae538fb05b7669e161fdd
+
+COCOAPODS: 1.9.1
