@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
-class FlutterPytorchOnnx {
+class Torch {
   static const MethodChannel _channel =
       const MethodChannel('flutter_pytorch_onnx');
 
